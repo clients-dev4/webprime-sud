@@ -100,7 +100,6 @@
     var price = card.querySelector('.ent-price');
     var big = price ? price.querySelector('b') : null;
     var hint = card.querySelector('.pt-hint');
-    var cta = card.querySelector('.pt-cta');
     if (!price || !big) return;
     Array.prototype.forEach.call(tg.querySelectorAll('.pt-btn'), function (btn) {
       btn.addEventListener('click', function () {
@@ -112,7 +111,6 @@
         var val = year ? price.getAttribute('data-year') : price.getAttribute('data-month');
         if (val) big.textContent = val;
         if (hint) hint.hidden = !year;
-        if (cta) { var h = year ? cta.getAttribute('data-year-href') : cta.getAttribute('data-month-href'); if (h) cta.href = h; }
       });
     });
   });

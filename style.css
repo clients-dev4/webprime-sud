@@ -1147,101 +1147,87 @@ a:hover {
 
 
 .footer {
-    background: var(--ink);
+    background: var(--bg-alt);
+    color: var(--text-body);
     border-top: 3px solid var(--ink);
-    padding: 40px 0 26px;
-    font-family: 'SF Mono', 'Fira Code', 'JetBrains Mono', 'Consolas', ui-monospace, monospace;
-}
-
-.footer .container::before {
-    content: "webprime@portal:~$ cat infos.txt";
-    display: block;
-    color: #22c55e;
-    font-size: 13px;
-    margin-bottom: 28px;
-    opacity: 0.85;
+    padding: 56px 0 26px;
 }
 
 .footer-grid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 28px;
-    margin-bottom: 28px;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 34px;
+    margin-bottom: 34px;
 }
 
 .footer-col h4 {
-    color: #9aa3ae;
-    font-size: 13px;
-    font-weight: 500;
-    text-transform: lowercase;
-    letter-spacing: 0.3px;
-    margin-bottom: 14px;
-}
-
-.footer-col h4::before {
-    content: "# ";
-    color: #f97316;
+    display: inline-block;
+    color: var(--ink);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: var(--primary-orange);
+    border: 3px solid var(--ink);
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+    padding: 5px 12px;
+    margin-bottom: 20px;
 }
 
 .footer-col p {
-    font-size: 12.5px;
-    color: rgba(255,255,255,0.72);
+    font-size: 14px;
+    color: var(--text-body);
     line-height: 1.7;
 }
 
 .footer-col ul a,
 .footer-col ul a:visited {
-    color: var(--primary-orange);
-    font-size: 13px;
-    display: inline-flex;
-    align-items: center;
-}
-
-.footer-col ul a::before {
-    content: "\2192";
-    color: #6b7280;
-    margin-right: 6px;
+    color: var(--text-strong);
+    font-size: 14px;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+    transition: border-color .15s ease, color .15s ease;
 }
 
 .footer-col ul a:hover {
-    color: #ffe08a;
+    color: var(--ink);
+    border-bottom-color: var(--primary-orange);
 }
 
 .social-links {
-    gap: 10px;
+    gap: 12px;
 }
 
 .social-links a {
-    width: 34px;
-    height: 34px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid #2a2a2e;
-    border-radius: 7px;
+    width: 42px;
+    height: 42px;
+    background: var(--ink);
+    border: 3px solid var(--ink);
+    border-radius: 10px;
+    box-shadow: var(--shadow-sm);
+    transition: transform .12s ease, box-shadow .12s ease;
 }
 
 .social-links a:hover {
-    background: rgba(249, 115, 22, 0.12);
-    border-color: #f97316;
-    transform: translateY(-2px);
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 var(--ink);
 }
 
 .social-links a svg {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
 }
 
 .footer-bottom {
-    border-top: 3px solid rgba(255,255,255,0.25);
+    border-top: 3px solid var(--ink);
     padding-top: 22px;
+    text-align: center;
 }
 
 .footer-bottom p {
-    color: rgba(255,255,255,0.55);
-    font-size: 12px;
-}
-
-.footer-bottom p::before {
-    content: "// ";
-    color: rgba(255,255,255,0.35);
+    color: var(--text-body);
+    font-size: 13px;
+    font-weight: 600;
 }
 
 @media (max-width: 768px) {
@@ -2650,8 +2636,9 @@ a:focus-visible, button:focus-visible, .btn:focus-visible, input:focus-visible, 
     height: 52px;
     width: auto;
     background: var(--bg-card);
-    border: 3px solid var(--bg-card);
+    border: 3px solid var(--ink);
     border-radius: 10px;
+    box-shadow: var(--shadow-sm);
     padding: 8px 12px;
     box-sizing: content-box;
     margin-bottom: 18px;

@@ -2693,8 +2693,6 @@ a:focus-visible, button:focus-visible, .btn:focus-visible, input:focus-visible, 
     70%  { box-shadow: 0 0 0 10px rgba(134,227,155,0); }
     100% { box-shadow: 0 0 0 0 rgba(134,227,155,0); }
 }
-.ent-places-updated { font-size: 13px; color: #9a9a9a; }
-.ent-places-updated b { color: #e8e8e8; font-weight: 600; }
 
 .ent-places-count { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
 .ent-places-taken { font-size: 76px; line-height: .85; font-weight: 700; letter-spacing: -3px; color: var(--primary-orange); }

@@ -2138,7 +2138,7 @@ a:hover {
             align-self: flex-start; text-align: center;
             margin: 0 0 16px; padding: 12px 18px;
             border: 3px solid var(--ink); border-radius: 10px;
-            background: var(--bg-card); box-shadow: var(--shadow-md);
+            background: var(--bg-alt); box-shadow: var(--shadow-md);
             font-size: 13px; font-weight: 600; color: var(--orange-ink);
         }
         .ent-price b { display: block; color: var(--ink); font-size: 32px; font-weight: 700; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 3px; }

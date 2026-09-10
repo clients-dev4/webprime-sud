@@ -2666,3 +2666,121 @@ a:focus-visible, button:focus-visible, .btn:focus-visible, input:focus-visible, 
 .pt-hint { font-size: 12.5px; font-weight: 600; color: var(--orange-ink); margin: -14px 0 20px; }
 
 .ent-offer-solo { max-width: 430px; margin-left: auto; margin-right: auto; }
+
+/* ============ Places limitées — compteur clients ============ */
+.ent-places-panel {
+    max-width: 880px; margin: 46px auto 0; text-align: left;
+    background: #0d0d0d; color: #f2f2f2;
+    border: 3px solid var(--ink); border-radius: 20px;
+    box-shadow: 8px 8px 0 var(--primary-orange);
+    padding: 34px 34px 30px;
+}
+.ent-places-head {
+    display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap;
+    border-bottom: 3px solid rgba(255,255,255,.13); padding-bottom: 16px; margin-bottom: 26px;
+}
+.ent-places-live {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--primary-orange);
+}
+.ent-places-live i {
+    width: 9px; height: 9px; border-radius: 50%; background: var(--pop-green);
+    animation: entPlacesPulse 2.2s ease-out infinite;
+}
+@keyframes entPlacesPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(134,227,155,.75); }
+    70%  { box-shadow: 0 0 0 10px rgba(134,227,155,0); }
+    100% { box-shadow: 0 0 0 0 rgba(134,227,155,0); }
+}
+.ent-places-updated { font-size: 13px; color: #9a9a9a; }
+.ent-places-updated b { color: #e8e8e8; font-weight: 600; }
+
+.ent-places-count { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
+.ent-places-taken { font-size: 76px; line-height: .85; font-weight: 700; letter-spacing: -3px; color: var(--primary-orange); }
+.ent-places-sep { font-size: 44px; font-weight: 700; color: #4d4d4d; }
+.ent-places-total { font-size: 44px; font-weight: 700; color: #ffffff; }
+.ent-places-count em { font-style: normal; font-size: 14.5px; color: #a5a5a5; margin-left: 8px; }
+
+.ent-places-slots { display: flex; flex-wrap: nowrap; gap: 7px; margin-bottom: 18px; }
+.ent-places-slots i {
+    flex: 1 1 0; min-width: 0; height: 36px; border-radius: 8px;
+    border: 3px solid var(--ink); background: #242424;
+}
+.ent-places-slots i.is-taken { background: var(--primary-orange); }
+.ent-places-slots i.is-free {
+    background: #141414; border-style: dashed; border-color: var(--primary-orange);
+    animation: entPlacesFree 1.9s ease-in-out infinite;
+}
+@keyframes entPlacesFree { 0%, 100% { opacity: .4; } 50% { opacity: 1; } }
+
+.ent-places-bar {
+    height: 18px; border: 3px solid var(--ink); border-radius: 999px;
+    background: #1a1a1a; overflow: hidden;
+}
+.ent-places-bar i {
+    display: block; height: 100%; width: 0; border-radius: 999px;
+    background: repeating-linear-gradient(45deg, var(--primary-orange) 0 11px, var(--orange-press) 11px 22px);
+    transition: width 1.5s cubic-bezier(.22,1,.36,1);
+}
+
+.ent-places-left { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-top: 22px; }
+.ent-places-badge {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: var(--primary-orange); color: var(--ink);
+    font-size: 15.5px; font-weight: 700;
+    border: 3px solid var(--ink); border-radius: 999px; padding: 9px 20px;
+    box-shadow: 3px 3px 0 rgba(255,255,255,.92);
+}
+.ent-places-badge i { width: 8px; height: 8px; border-radius: 50%; background: var(--ink); }
+.ent-places-badge b { font-weight: 700; }
+.ent-places-left p { margin: 0; font-size: 13.5px; color: #9a9a9a; flex: 1 1 200px; }
+
+.ent-places-why { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-top: 28px; }
+.ent-places-why div { background: #161616; border: 3px solid rgba(255,255,255,.11); border-radius: 12px; padding: 15px 17px; }
+.ent-places-why b { display: block; color: var(--primary-orange); font-size: 14.5px; margin-bottom: 4px; }
+.ent-places-why span { display: block; font-size: 13px; line-height: 1.55; color: #a5a5a5; }
+
+.ent-places-cta { display: block; margin-top: 26px; text-align: center; box-shadow: 5px 5px 0 rgba(255,255,255,.92); }
+.ent-places-cta:hover { box-shadow: 3px 3px 0 rgba(255,255,255,.92); }
+.ent-places-cta:active { box-shadow: 0 0 0 rgba(255,255,255,.92); }
+
+@media (max-width: 720px) {
+    .ent-places-panel { padding: 24px 18px 22px; box-shadow: 5px 5px 0 var(--primary-orange); }
+    .ent-places-taken { font-size: 58px; letter-spacing: -2px; }
+    .ent-places-sep, .ent-places-total { font-size: 34px; }
+    .ent-places-count em { flex: 1 1 100%; margin-left: 0; margin-top: 4px; }
+    .ent-places-slots { gap: 4px; }
+    .ent-places-slots i { height: 26px; border-width: 2px; border-radius: 5px; }
+    .ent-places-cta { padding: 15px 18px; font-size: 15px; }
+}
+
+
+/* ============ Compteur de places dans l'en-tête ============ */
+.ent-header .container { gap: 14px; }
+.ent-hplaces {
+    display: inline-flex; align-items: center; margin-right: auto;
+    background: var(--alert-red); color: #fff;
+    border: 3px solid var(--ink); border-radius: 999px;
+    padding: 7px 15px; font-size: 13.5px; font-weight: 700; line-height: 1;
+    box-shadow: var(--shadow-sm); white-space: nowrap;
+    transition: transform .12s ease, box-shadow .12s ease;
+}
+.ent-hplaces:hover, .ent-hplaces:active { color: #fff; transform: translate(2px, 2px); box-shadow: 0 0 0 var(--ink); }
+.ent-hplaces i {
+    width: 8px; height: 8px; border-radius: 50%; background: #fff; margin-right: 9px; flex-shrink: 0;
+    animation: entHplacesBlink 1.6s ease-in-out infinite;
+}
+@keyframes entHplacesBlink { 0%, 100% { opacity: 1; } 50% { opacity: .2; } }
+.ent-hplaces b { font-weight: 800; font-size: 15.5px; }
+.ent-hplaces.is-full { background: #3f3f46; }
+.ent-hplaces.is-full i { animation: none; }
+
+@media (max-width: 1024px) { .ent-hplaces-long { display: none; } }
+@media (max-width: 400px) {
+    .ent-header .container { gap: 8px; }
+    .ent-hplaces { padding: 6px 11px; font-size: 11.5px; border-width: 2px; box-shadow: 2px 2px 0 var(--ink); }
+    .ent-hplaces i { width: 7px; height: 7px; margin-right: 6px; }
+    .ent-hplaces b { font-size: 13px; }
+    .ent-logo-img { height: 38px; }
+}

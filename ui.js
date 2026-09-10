@@ -149,8 +149,8 @@ var PLACES_PRISES = 17;   // clients accompagnés aujourd'hui
     // Margin simulator
     var range = document.getElementById('simRange');
     if (range) {
-        var per = 171;
-        function fmt(n) { return n.toLocaleString('fr-FR'); }
+        var per = 192.5;
+        function fmt(n) { return Math.round(n).toLocaleString('fr-FR'); }
         function updSim() {
             var n = +range.value;
             document.getElementById('simClients').textContent = n;

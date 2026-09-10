@@ -2135,7 +2135,7 @@ a:hover {
         }
         .ent-offer h3 { font-size: 19px; color: var(--text-title); margin-bottom: 14px; }
         .ent-price {
-            display: flex; align-items: baseline; flex-wrap: wrap; gap: 7px;
+            display: flex; flex-direction: column; align-items: flex-start; gap: 3px;
             margin: 0 0 22px; padding-bottom: 22px; border-bottom: 3px solid var(--border);
             font-size: 13.5px; color: var(--text-body);
         }

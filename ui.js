@@ -166,22 +166,19 @@ var PLACES_PRISES = 17;   // clients accompagnés aujourd'hui
 /* price-toggle */
 (function () {
   var toggles = document.querySelectorAll('.price-toggle');
+  // Chaque élément de la card portant data-<plan> (ex : data-year, data-half) prend ce texte au clic.
   Array.prototype.forEach.call(toggles, function (tg) {
     var card = tg.parentNode;
-    var price = card.querySelector('.ent-price');
-    var big = price ? price.querySelector('b') : null;
-    var hint = card.querySelector('.pt-hint');
-    if (!price || !big) return;
     Array.prototype.forEach.call(tg.querySelectorAll('.pt-btn'), function (btn) {
       btn.addEventListener('click', function () {
         Array.prototype.forEach.call(tg.querySelectorAll('.pt-btn'), function (b) {
           b.classList.remove('active'); b.setAttribute('aria-selected', 'false');
         });
         btn.classList.add('active'); btn.setAttribute('aria-selected', 'true');
-        var year = btn.getAttribute('data-plan') === 'year';
-        var val = year ? price.getAttribute('data-year') : price.getAttribute('data-month');
-        if (val) big.textContent = val;
-        if (hint) hint.hidden = !year;
+        var attr = 'data-' + btn.getAttribute('data-plan');
+        Array.prototype.forEach.call(card.querySelectorAll('[' + attr + ']'), function (el) {
+          el.textContent = el.getAttribute(attr);
+        });
       });
     });
   });

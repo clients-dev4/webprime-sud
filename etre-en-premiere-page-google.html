@@ -134,32 +134,32 @@
                             <div class="checkbox-group">
                                 <label class="checkbox-option">
                                     <input type="checkbox" name="plateforme" value="WordPress">
-                                    <span class="custom-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                                    <span class="custom-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
                                     <span class="option-text">WordPress</span>
                                 </label>
                                 <label class="checkbox-option">
                                     <input type="checkbox" name="plateforme" value="Wix">
-                                    <span class="custom-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                                    <span class="custom-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
                                     <span class="option-text">Wix</span>
                                 </label>
                                 <label class="checkbox-option">
                                     <input type="checkbox" name="plateforme" value="Squarespace">
-                                    <span class="custom-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                                    <span class="custom-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
                                     <span class="option-text">Squarespace</span>
                                 </label>
                                 <label class="checkbox-option">
                                     <input type="checkbox" name="plateforme" value="Webflow">
-                                    <span class="custom-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                                    <span class="custom-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
                                     <span class="option-text">Webflow</span>
                                 </label>
                                 <label class="checkbox-option">
                                     <input type="checkbox" name="plateforme" value="Site codé sur mesure">
-                                    <span class="custom-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                                    <span class="custom-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
                                     <span class="option-text">Site codé sur mesure (HTML / PHP / JS)</span>
                                 </label>
                                 <label class="checkbox-option">
                                     <input type="checkbox" name="plateforme" value="Autre">
-                                    <span class="custom-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                                    <span class="custom-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
                                     <span class="option-text">Autre / plusieurs</span>
                                 </label>
                             </div>
@@ -172,17 +172,17 @@
                                 <label class="radio-option">
                                     <input type="radio" name="nb_sites" value="1 à 2 sites" required>
                                     <span class="custom-radio"></span>
-                                    <span class="option-text">1 à 2 sites</span>
+                                    <span class="option-text">1 à 2 sites (tarif public)</span>
                                 </label>
                                 <label class="radio-option">
-                                    <input type="radio" name="nb_sites" value="3 à 4 sites">
+                                    <input type="radio" name="nb_sites" value="3 à 5 sites">
                                     <span class="custom-radio"></span>
-                                    <span class="option-text">3 à 4 sites</span>
+                                    <span class="option-text">3 à 5 sites (tarif agence web)</span>
                                 </label>
                                 <label class="radio-option">
-                                    <input type="radio" name="nb_sites" value="5 sites et +">
+                                    <input type="radio" name="nb_sites" value="6 sites et +">
                                     <span class="custom-radio"></span>
-                                    <span class="option-text">5 sites et +</span>
+                                    <span class="option-text">6 sites et + (tarif agence web)</span>
                                 </label>
                             </div>
                             <div class="error-msg">Veuillez sélectionner une option</div>
@@ -359,14 +359,21 @@
                 payload.append('Téléphone', fd.get('telephone') || '');
                 if (fd.get('secteur')) payload.append('Secteur d\'activité ciblé', fd.get('secteur'));
                 if (fd.get('message')) payload.append('Message', fd.get('message'));
-                payload.append('_subject', 'Nouvelle demande partenaire WebPrime — ' + (agence || prenom));
-                payload.append('_template', 'table');
-                payload.append('_captcha', 'false');
+                // Envoi au webhook de l'app WebPrime : champs standards + récap complet dans le message
+                var recap = ['DEMANDE PARTENAIRE — ' + (agence || prenom), ''];
+                payload.forEach(function (valeur, cle) { recap.push(cle + ' : ' + valeur); });
 
-                var response = await fetch('https://formsubmit.co/ajax/partenaire@webprime.fr', {
+                var envoi = new FormData();
+                envoi.append('name', prenom);
+                envoi.append('email', fd.get('email') || '');
+                envoi.append('phone', fd.get('telephone') || '');
+                envoi.append('company', agence);
+                envoi.append('subject', 'Demande partenaire — ' + (agence || prenom));
+                envoi.append('message', recap.join('\n'));
+
+                var response = await fetch('https://webprime.app/webhook/contact/bc024c6a49270fbd5c6410130a36f4a25f54b1d8af00affb5697d01be039f033', {
                     method: 'POST',
-                    body: payload,
-                    headers: { 'Accept': 'application/json' }
+                    body: envoi
                 });
 
                 if (response.ok) {

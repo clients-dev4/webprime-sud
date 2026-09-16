@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mandat de prélèvement SEPA — Site e-commerce - WebPrime</title>
+    <meta name="description" content="Signature en ligne du mandat de prélèvement SEPA pour votre abonnement WebPrime.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" type="image/png" sizes="192x192" href="./logo/icon-192x192.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .form-section-title { font-size: 18px; font-weight: 700; color: var(--text-title); margin: 34px 0 6px; }
+        .form-section-title:first-of-type { margin-top: 0; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+        .form-row.cp { grid-template-columns: 140px 1fr; }
+        @media (max-width: 600px) { .form-row, .form-row.cp { grid-template-columns: 1fr; } }
+        .mandat-offre { border: 3px solid var(--ink); border-radius: 12px; background: var(--bg-card); padding: 16px 18px; margin: 10px 0 16px; }
+        .mandat-offre .tag { display: inline-block; font-size: 12px; font-weight: 600; border: 2px solid var(--ink); border-radius: 999px; padding: 2px 10px; background: var(--pop-yellow); margin-bottom: 8px; }
+        .mandat-offre h3 { font-size: 20px; margin: 0 0 4px; color: var(--text-title); }
+        .mandat-offre p { margin: 0; color: var(--text-body); }
+        .mandat-total { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; border: 3px solid var(--ink); border-radius: 12px; background: var(--bg-alt); padding: 14px 18px; margin: 4px 0 8px; font-weight: 600; }
+        .mandat-total b { font-size: 22px; }
+        .mandat-box { border: 3px solid var(--ink); border-radius: 12px; background: var(--bg-page); padding: 20px; font-size: 14px; line-height: 1.6; color: var(--text-body); margin-bottom: 18px; }
+        .mandat-box h3 { font-size: 16px; margin: 0 0 12px; color: var(--text-title); }
+        .mandat-box dl { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; margin: 0 0 14px; }
+        .mandat-box dt { font-weight: 600; color: var(--text-strong); }
+        .mandat-box dd { margin: 0; overflow-wrap: anywhere; }
+        .mandat-box p { margin: 0 0 10px; }
+        .mandat-box p:last-child { margin-bottom: 0; }
+        .iban-input { font-family: ui-monospace, Menlo, Consolas, monospace; letter-spacing: 1px; text-transform: uppercase; }
+        .field-hint { font-size: 13px; color: var(--text-body); margin-top: 6px; }
+        .mandat-done { text-align: center; }
+        .mandat-done h2 { margin-bottom: 10px; }
+        .mandat-done .mandat-box { text-align: left; margin-top: 24px; }
+        @media (max-width: 768px) {
+            .contact-page { padding-top: 40px; }
+            .contact-page .container { padding: 0 14px; }
+            .form-card { margin: 0; padding: 22px 16px; border-radius: 12px; }
+            .mandat-box { padding: 14px 12px; }
+            .mandat-offre, .mandat-total { padding: 12px; }
+            .mandat-box dl { grid-template-columns: 1fr; gap: 0; }
+            .mandat-box dd { margin-bottom: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="contact-page">
+        <div class="container" style="max-width: 800px;">
+
+            <a title="referencement google" href="https://webprime-sud.fr/"><img src="webprime.png" alt="WebPrime" class="form-logo"></a>
+
+            <div class="contact-header">
+                <h1>Mandat de <span>prélèvement SEPA</span></h1>
+                <p>Renseignez vos coordonnées bancaires et acceptez le mandat : votre abonnement WebPrime sera prélevé automatiquement chaque année.</p>
+            </div>
+
+            <div class="form-card" id="mandatCard">
+                <form id="mandatForm" novalidate>
+                    <div class="hp-wrap">
+                        <label for="website">Votre site web :</label>
+                        <input type="text" id="website" name="_gotcha" autocomplete="off">
+                    </div>
+
+                    <h2 class="form-section-title">1. Votre formule</h2>
+                    <p class="form-page-subtitle">L'abonnement est annuel, facturé en une fois, avec un engagement d'un an.</p>
+
+                    <div class="mandat-offre">
+                        <span class="tag">Site e-commerce</span>
+                        <h3>Site e-commerce</h3>
+                        <p>489€ la première année, puis 389€ par an — facturé en une fois chaque année</p>
+                    </div>
+
+                    <div class="mandat-total" id="mandatTotal">
+                        <span id="totalLabel">Première année</span>
+                        <b id="totalAmount">—</b>
+                    </div>
+                    <div class="mandat-total">
+                        <span>Les années suivantes</span>
+                        <b>389€ / an</b>
+                    </div>
+
+                    <h2 class="form-section-title">2. Titulaire du compte</h2>
+                    <p class="form-page-subtitle">Tel qu'il apparaît sur votre RIB.</p>
+
+                    <div class="form-group">
+                        <label for="entreprise">Raison sociale</label>
+                        <input type="text" id="entreprise" name="entreprise" placeholder="Ex : SARL Martin Toiture" autocomplete="organization">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="prenom">Prénom <span class="required">*</span></label>
+                            <input type="text" id="prenom" name="prenom" required autocomplete="given-name">
+                            <div class="error-msg">Veuillez indiquer votre prénom</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nom">Nom <span class="required">*</span></label>
+                            <input type="text" id="nom" name="nom" required autocomplete="family-name">
+                            <div class="error-msg">Veuillez indiquer votre nom</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adresse">Adresse <span class="required">*</span></label>
+                        <input type="text" id="adresse" name="adresse" placeholder="Numéro et rue" required autocomplete="street-address">
+                        <div class="error-msg">Veuillez indiquer votre adresse</div>
+                    </div>
+
+                    <div class="form-row cp">
+                        <div class="form-group">
+                            <label for="cp">Code postal <span class="required">*</span></label>
+                            <input type="text" id="cp" name="cp" inputmode="numeric" pattern="^\d{5}$" required autocomplete="postal-code">
+                            <div class="error-msg">Code postal invalide</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ville">Ville <span class="required">*</span></label>
+                            <input type="text" id="ville" name="ville" required autocomplete="address-level2">
+                            <div class="error-msg">Veuillez indiquer votre ville</div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" placeholder="vous@entreprise.fr" required autocomplete="email">
+                            <div class="error-msg">Veuillez indiquer un email valide</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="telephone">Téléphone <span class="required">*</span></label>
+                            <input type="tel" id="telephone" name="telephone" placeholder="06 00 00 00 00" required autocomplete="tel">
+                            <div class="error-msg">Veuillez indiquer votre téléphone</div>
+                        </div>
+                    </div>
+
+                    <h2 class="form-section-title">3. Coordonnées bancaires</h2>
+
+                    <div class="form-group">
+                        <label for="iban">IBAN <span class="required">*</span></label>
+                        <input type="text" id="iban" name="iban" class="iban-input" placeholder="FR76 0000 0000 0000 0000 0000 000" required autocomplete="off" spellcheck="false">
+                        <div class="error-msg">IBAN invalide, vérifiez les caractères saisis</div>
+                    </div>
+
+
+                    <h2 class="form-section-title">4. Mandat</h2>
+
+                    <div class="mandat-box">
+                        <h3>Mandat de prélèvement SEPA</h3>
+                        <dl>
+                            <dt>Créancier</dt><dd id="creancierNom"></dd>
+                            <dt>Adresse</dt><dd id="creancierAdresse"></dd>
+                            <dt>ICS</dt><dd id="creancierIcs"></dd>
+                            <dt>Référence (RUM)</dt><dd id="rum"></dd>
+                            <dt>Type de paiement</dt><dd>Récurrent (annuel)</dd>
+                        </dl>
+                        <p>En signant ce formulaire de mandat, vous autorisez (A) <b id="creancierNom2"></b> à envoyer des instructions à votre banque pour débiter votre compte, et (B) votre banque à débiter votre compte conformément aux instructions de <span id="creancierNom3"></span>. Vous bénéficiez d'un droit à remboursement par votre banque selon les conditions décrites dans la convention que vous avez passée avec elle. Toute demande de remboursement doit être présentée dans les 8 semaines suivant la date de débit de votre compte.</p>
+                        <p>Remarque : Vos droits concernant le mandat ci-dessus sont expliqués dans un document que vous pouvez obtenir auprès de votre banque.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="accept_mandat" value="oui" required>
+                                <span class="custom-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                                <span class="option-text">J'accepte le mandat de prélèvement SEPA ci-dessus et je certifie être titulaire du compte ou habilité à le représenter. <span class="required">*</span></span>
+                            </label>
+                        </div>
+                        <div class="error-msg">Vous devez accepter le mandat pour continuer</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="accept_engagement" value="oui" required>
+                                <span class="custom-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                                <span class="option-text">J'ai pris connaissance de la formule choisie, de ses montants annuels et de l'engagement d'un an. <span class="required">*</span></span>
+                            </label>
+                        </div>
+                        <div class="error-msg">Veuillez confirmer la formule et l'engagement</div>
+                    </div>
+
+                    <p class="field-hint" id="signatureInfo"></p>
+
+                    <div class="form-buttons">
+                        <button type="submit" class="btn-submit">Accepter et signer le mandat</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        var OFFRE = {"libelle":"Site e-commerce — 489€ la 1ère année puis 389€/an","prix":489,"prixSuivant":389};
+    </script>
+    <script src="mandat-sepa.js"></script>
+</body>
+</html>

@@ -100,6 +100,7 @@ function blocVirement() {
 (function () {
     var style = document.createElement('style');
     style.textContent = '.mandat-virement { background: var(--bg-alt); }' +
+        '.mandat-suite { margin: 20px 0; } .mandat-suite p { margin: 0 0 12px; } .mandat-suite .btn-submit { display: inline-block; text-decoration: none; margin: 0; }' +
         '.rib-copier { font: inherit; font-size: 12px; font-weight: 700; cursor: pointer; border: 2px solid var(--ink); border-radius: 6px; background: var(--bg-card); padding: 1px 8px; margin-left: 6px; }';
     document.head.appendChild(style);
     var signature = document.getElementById('signatureInfo');
@@ -225,7 +226,24 @@ form.addEventListener('submit', async function (e) {
     }
 });
 
+function packFormulaire() {
+    if (/^Site vitrine/.test(OFFRE.libelle)) return 'Site vitrine';
+    if (/^Site e-commerce/.test(OFFRE.libelle)) return 'Site e-commerce';
+    if (/^Site booking/.test(OFFRE.libelle)) return 'Site booking';
+    return OFFRE.semestriel ? 'Pack 1ère page Google (6 mois)' : 'Pack 1ère page Google (1 an)';
+}
+
+function lienFormulaireProjet() {
+    var p = new URLSearchParams();
+    p.set('offre', packFormulaire());
+    if (form.email.value.trim()) p.set('email', form.email.value.trim());
+    if (form.telephone.value.trim()) p.set('telephone', form.telephone.value.trim());
+    if (form.entreprise.value.trim()) p.set('entreprise', form.entreprise.value.trim());
+    return 'https://webprime.fr/dhfgmskfh.html?' + p.toString();
+}
+
 function afficherConfirmation(f, nomComplet, iban, dateSignature) {
+    var lien = lienFormulaireProjet();
     var card = document.getElementById('mandatCard');
     card.innerHTML = '';
     var wrap = document.createElement('div');
@@ -233,7 +251,10 @@ function afficherConfirmation(f, nomComplet, iban, dateSignature) {
     wrap.innerHTML =
         '<h2 class="form-page-title">Mandat bien <span>signé</span> !</h2>' +
         '<p class="form-page-subtitle">Merci, votre mandat de prélèvement SEPA est enregistré. Conservez votre référence de mandat.</p>' +
+        '<div class="mandat-suite"><p><b>Dernière étape :</b> remplissez vos informations pour lancer votre projet.</p>' +
+        '<a class="btn-submit" id="lienFormulaireProjet">Remplir mes informations projet →</a></div>' +
         '<div class="mandat-box"><dl></dl></div>';
+    wrap.querySelector('#lienFormulaireProjet').href = lien;
     var dl = wrap.querySelector('dl');
     [
         ['Référence (RUM)', rum],
@@ -249,7 +270,7 @@ function afficherConfirmation(f, nomComplet, iban, dateSignature) {
         var dd = document.createElement('dd'); dd.textContent = l[1];
         dl.appendChild(dt); dl.appendChild(dd);
     });
-    wrap.appendChild(blocVirement());
+    wrap.insertBefore(blocVirement(), wrap.querySelector('.mandat-box'));
     card.appendChild(wrap);
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }

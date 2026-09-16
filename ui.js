@@ -1,20 +1,13 @@
-/* =========================================================================
-   PLACES DISPONIBLES — le seul endroit à modifier
-   Change PLACES_PRISES quand un client entre ou sort : le compteur rouge de
-   l'en-tête (toutes les pages) et la section de l'accueil se recalculent seuls.
-   ========================================================================= */
-var PLACES_TOTAL  = 20;   // nombre maximum de clients accompagnés
-var PLACES_PRISES = 17;   // clients accompagnés aujourd'hui
+var PLACES_TOTAL  = 20;
+var PLACES_PRISES = 17;
 
 (function () {
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Scroll progress bar
     var bar = document.createElement('div');
     bar.className = 'ent-progress';
     document.body.appendChild(bar);
 
-    // Back to top
     var top = document.createElement('button');
     top.className = 'ent-top';
     top.setAttribute('aria-label', 'Retour en haut');
@@ -35,7 +28,6 @@ var PLACES_PRISES = 17;   // clients accompagnés aujourd'hui
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
-    // Animated counters
     var stats = document.querySelectorAll('.ent-stat .big');
     if (stats.length && 'IntersectionObserver' in window) {
         var co = new IntersectionObserver(function (entries) {
@@ -60,7 +52,6 @@ var PLACES_PRISES = 17;   // clients accompagnés aujourd'hui
         stats.forEach(function (s) { co.observe(s); });
     }
 
-    // Sectors marquee
     var sectors = document.querySelector('.ent-sectors');
     if (sectors && !reduce) {
         var track = document.createElement('div');
@@ -71,7 +62,6 @@ var PLACES_PRISES = 17;   // clients accompagnés aujourd'hui
         sectors.classList.add('is-marquee');
     }
 
-    // Magnetic primary CTAs (prominent ones, fine pointer only)
     if (!reduce && window.matchMedia('(pointer:fine)').matches) {
         document.querySelectorAll('.ent-hero .btn-primary, .ent-actions .btn-primary, .ent-cta .btn-primary').forEach(function (b) {
             b.addEventListener('mousemove', function (e) {
@@ -83,7 +73,6 @@ var PLACES_PRISES = 17;   // clients accompagnés aujourd'hui
         });
     }
 
-    // Places limitées : badge de l'en-tête (toutes les pages) + section de l'accueil
     var total = Math.max(1, PLACES_TOTAL);
     var taken = Math.min(Math.max(0, PLACES_PRISES), total);
     var free = total - taken;
@@ -146,7 +135,6 @@ var PLACES_PRISES = 17;   // clients accompagnés aujourd'hui
         }
     }
 
-    // Margin simulator
     var range = document.getElementById('simRange');
     if (range) {
         var per = 192.5;
@@ -163,10 +151,8 @@ var PLACES_PRISES = 17;   // clients accompagnés aujourd'hui
 })();
 
 
-/* price-toggle */
 (function () {
   var toggles = document.querySelectorAll('.price-toggle');
-  // Chaque élément de la card portant data-<plan> (ex : data-year, data-half) prend ce texte au clic.
   Array.prototype.forEach.call(toggles, function (tg) {
     var card = tg.parentNode;
     Array.prototype.forEach.call(tg.querySelectorAll('.pt-btn'), function (btn) {

@@ -359,7 +359,6 @@
                 payload.append('Téléphone', fd.get('telephone') || '');
                 if (fd.get('secteur')) payload.append('Secteur d\'activité ciblé', fd.get('secteur'));
                 if (fd.get('message')) payload.append('Message', fd.get('message'));
-                // Envoi au webhook de l'app WebPrime : champs standards + récap complet dans le message
                 var recap = ['DEMANDE PARTENAIRE — ' + (agence || prenom), ''];
                 payload.forEach(function (valeur, cle) { recap.push(cle + ' : ' + valeur); });
 

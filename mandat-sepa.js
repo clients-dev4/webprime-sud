@@ -8,6 +8,14 @@ var CREANCIER = {
     ics: 'FR78ZZZ8B26BD'
 };
 
+// RIB affiché pour le 1er paiement, réglé par virement
+var RIB = {
+    titulaire: 'Daelia Partners',
+    iban: 'FR76 1695 8000 0194 9590 5994 191',
+    bic: 'QNTOFRP1XXX',
+    banque: 'Qonto'
+};
+
 var form = document.getElementById('mandatForm');
 var rum = genererRum();
 var PERIODE = OFFRE.semestriel
@@ -52,6 +60,57 @@ function masquerIban(v) {
 }
 
 function formaterEuros(n) { return n.toLocaleString('fr-FR') + '€'; }
+
+function texteSuiteVirement() {
+    if (OFFRE.prixSuivant) return 'Les années suivantes (' + formaterEuros(OFFRE.prixSuivant) + ' / an) sont ensuite prélevées automatiquement par prélèvement SEPA.';
+    return 'Les renouvellements sont ensuite prélevés automatiquement par prélèvement SEPA, ' + (OFFRE.semestriel ? 'tous les 6 mois.' : 'chaque année.');
+}
+
+// Encadré « 1er paiement par virement » avec le RIB et la référence à indiquer
+function blocVirement() {
+    var box = document.createElement('div');
+    box.className = 'mandat-box mandat-virement';
+    box.innerHTML = '<h3>1er paiement par virement</h3><p></p><dl></dl>';
+    box.querySelector('p').textContent = 'Le premier paiement de ' + formaterEuros(OFFRE.prix) +
+        ' se fait par virement bancaire, avec la référence ci-dessous. ' + texteSuiteVirement();
+    var dl = box.querySelector('dl');
+    [
+        ['Montant', formaterEuros(OFFRE.prix)],
+        ['Titulaire', RIB.titulaire],
+        ['IBAN', RIB.iban, true],
+        ['BIC', RIB.bic, true],
+        ['Banque', RIB.banque],
+        ['Référence', rum, true]
+    ].forEach(function (l) {
+        var dt = document.createElement('dt'); dt.textContent = l[0];
+        var dd = document.createElement('dd'); dd.textContent = l[1];
+        if (l[2]) {
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'rib-copier';
+            btn.textContent = 'Copier';
+            btn.addEventListener('click', function () {
+                navigator.clipboard.writeText(l[1].replace(/\s+/g, l[0] === 'Référence' ? ' ' : '')).then(function () {
+                    btn.textContent = 'Copié ✓';
+                    setTimeout(function () { btn.textContent = 'Copier'; }, 2000);
+                });
+            });
+            dd.appendChild(document.createTextNode(' '));
+            dd.appendChild(btn);
+        }
+        dl.appendChild(dt); dl.appendChild(dd);
+    });
+    return box;
+}
+
+(function () {
+    var style = document.createElement('style');
+    style.textContent = '.mandat-virement { background: var(--bg-alt); }' +
+        '.rib-copier { font: inherit; font-size: 12px; font-weight: 700; cursor: pointer; border: 2px solid var(--ink); border-radius: 6px; background: var(--bg-card); padding: 1px 8px; margin-left: 6px; }';
+    document.head.appendChild(style);
+    var signature = document.getElementById('signatureInfo');
+    signature.parentNode.insertBefore(blocVirement(), signature);
+})();
 
 function calculerFormule() {
     return { libelle: OFFRE.libelle, total: OFFRE.prix };
@@ -134,6 +193,7 @@ form.addEventListener('submit', async function (e) {
         'Formule : ' + f.libelle,
         PERIODE.montant + ' : ' + formaterEuros(f.total),
         OFFRE.prixSuivant ? 'Années suivantes : ' + formaterEuros(OFFRE.prixSuivant) + ' / an' : null,
+        '1er paiement : par virement de ' + formaterEuros(f.total) + ' (référence ' + rum + '), prélèvements SEPA ensuite',
         '',
         'Titulaire : ' + nomComplet,
         'Raison sociale : ' + (form.entreprise.value.trim() || 'Non renseigné'),
@@ -195,6 +255,7 @@ function afficherConfirmation(f, nomComplet, iban, dateSignature) {
         var dd = document.createElement('dd'); dd.textContent = l[1];
         dl.appendChild(dt); dl.appendChild(dd);
     });
+    wrap.appendChild(blocVirement());
     card.appendChild(wrap);
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }

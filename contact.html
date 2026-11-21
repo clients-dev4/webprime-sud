@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - WebPrime | Devis création d'application mobile</title>
+    <meta name="description" content="Contactez WebPrime pour votre application mobile iOS et Android : vitrine, contenu, réservation, e-commerce, marketplace ou temps réel. Devis gratuit, réponse rapide.">
+    <link rel="canonical" href="https://webprime-sud.fr/contact.html"/>
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" type="image/png" sizes="192x192" href="./logo/icon-192x192.png">
+    <link rel="stylesheet" href="style.css?v=20261121">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <section class="contact-page">
+        <div class="container" style="max-width: 800px;">
+
+            <a title="creation application mobile" href="https://webprime-sud.fr/index.html"><img src="webprime.png" alt="WebPrime" class="form-logo"></a>
+
+            <div class="contact-header">
+                <h1>Parlons de votre <span>projet</span></h1>
+                <p>Dites-nous quelle application vous voulez créer — ou juste votre idée si vous hésitez encore. On revient vers vous rapidement.</p>
+            </div>
+
+            <div class="form-card">
+                <form id="contactForm" novalidate>
+                    <div class="hp-wrap">
+                        <label for="website">Votre site actuel :</label>
+                        <input type="text" id="website" name="_gotcha" autocomplete="off">
+                    </div>
+
+                    <div class="form-page active" data-page="1">
+                        <h2 class="form-page-title">Votre projet</h2>
+                        <p class="form-page-subtitle">Choisissez la formule qui vous intéresse.</p>
+
+                        <div class="form-group">
+                            <label>Quelle formule ? <span class="required">*</span></label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="projet" value="App Vitrine — 987€" data-key="app-vitrine" required>
+                                    <span class="custom-radio"></span>
+                                    <span class="option-text">📱 App Vitrine — 987€ (297€ puis 58€/mois)</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="projet" value="App Contenu & média — 1 987€" data-key="app-contenu">
+                                    <span class="custom-radio"></span>
+                                    <span class="option-text">🎬 App Contenu & média — 1 987€ (597€ puis 116€/mois)</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="projet" value="App Rendez-vous — 2 987€" data-key="app-booking">
+                                    <span class="custom-radio"></span>
+                                    <span class="option-text">📅 App Rendez-vous, réservation — 2 987€ (897€ puis 175€/mois)</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="projet" value="App E-commerce — 4 987€" data-key="app-ecommerce">
+                                    <span class="custom-radio"></span>
+                                    <span class="option-text">🛒 App E-commerce — 4 987€ (1 497€ puis 291€/mois)</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="projet" value="App Marketplace d'annonces — 7 987€" data-key="app-marketplace">
+                                    <span class="custom-radio"></span>
+                                    <span class="option-text">🏷️ App Marketplace d'annonces — 7 987€ (2 397€ puis 466€/mois)</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="projet" value="App Temps réel, 2 applications — 12 987€" data-key="app-temps-reel">
+                                    <span class="custom-radio"></span>
+                                    <span class="option-text">📍 App Temps réel, 2 applications — 12 987€ (3 897€ puis 758€/mois)</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="projet" value="Je ne sais pas encore" data-key="autre">
+                                    <span class="custom-radio"></span>
+                                    <span class="option-text">Je ne sais pas encore, conseillez-moi</span>
+                                </label>
+                            </div>
+                            <div class="error-msg">Veuillez sélectionner une formule</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="entreprise">Nom de votre entreprise</label>
+                            <input type="text" id="entreprise" name="entreprise" placeholder="Ex : Boulangerie Martin">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="prenom">Prénom <span class="required">*</span></label>
+                            <input type="text" id="prenom" name="prenom" placeholder="Prénom" required>
+                            <div class="error-msg">Veuillez indiquer votre prénom</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" placeholder="vous@exemple.fr" required>
+                            <div class="error-msg">Veuillez indiquer un email valide</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telephone">Téléphone <span class="required">*</span></label>
+                            <input type="tel" id="telephone" name="telephone" placeholder="06 00 00 00 00" required pattern="(?:(?:\+|00)33[ .\-]?|0)[1679](?:[ .\-]?\d{2}){4}" maxlength="20" inputmode="tel" title="Numéro français uniquement : 06 12 34 56 78 ou +33 6 12 34 56 78">
+                            <div class="error-msg">Veuillez indiquer votre téléphone</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Votre projet en quelques mots (optionnel)</label>
+                            <textarea id="message" name="message" placeholder="Votre activité, ce que l'application doit faire, vos délais…"></textarea>
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="submit" class="btn-submit">Envoyer ma demande</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <nav class="ent-bottom-nav">
+        <a title="creation application mobile" href="https://webprime-sud.fr/index.html" class="ent-bn-item"><span class="ent-bn-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></span><span class="ent-bn-label">Accueil</span></a>
+        <a title="prix application mobile" href="https://webprime-sud.fr/index.html#offres" class="ent-bn-item"><span class="ent-bn-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><span class="ent-bn-label">Tarifs</span></a>
+        <a title="contact" href="https://webprime-sud.fr/contact.html" class="ent-bn-item ent-bn-contact"><span class="ent-bn-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg></span><span class="ent-bn-label">Contact</span></a>
+        <a title="types d'applications mobiles" href="https://webprime-sud.fr/index.html#types" class="ent-bn-item"><span class="ent-bn-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span><span class="ent-bn-label">Types</span></a>
+    </nav>
+
+    <script>
+        (function () {
+            var form = document.getElementById('contactForm');
+
+            // Pré-sélection de la formule via ?projet=...
+            var key = new URLSearchParams(window.location.search).get('projet');
+            if (key) {
+                var pre = form.querySelector('input[name="projet"][data-key="' + key + '"]');
+                if (pre) pre.checked = true;
+            }
+
+            function validate() {
+                var valid = true;
+                form.querySelectorAll('.form-group').forEach(function (g) { g.classList.remove('error'); });
+                form.querySelectorAll('input[required]').forEach(function (input) {
+                    if (input.type === 'radio') return;
+                    if (!input.value.trim() || !input.checkValidity()) {
+                        input.closest('.form-group').classList.add('error');
+                        valid = false;
+                    }
+                });
+                if (!form.querySelector('input[name="projet"]:checked')) {
+                    form.querySelector('.radio-group').closest('.form-group').classList.add('error');
+                    valid = false;
+                }
+                return valid;
+            }
+
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+                if (!validate()) {
+                    var err = form.querySelector('.form-group.error');
+                    if (err) err.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    return;
+                }
+                if (form._gotcha && form._gotcha.value) return false;
+
+                var btn = form.querySelector('.btn-submit');
+                var originalText = btn.textContent;
+                btn.textContent = 'Envoi en cours...';
+                btn.disabled = true;
+
+                try {
+                    var fd = new FormData(form);
+                    var prenom = fd.get('prenom') || '';
+                    var entreprise = fd.get('entreprise') || '';
+                    var lignes = ['DEMANDE DE PROJET — ' + (entreprise || prenom), '',
+                                  'Formule : ' + (fd.get('projet') || 'Non renseigné'),
+                                  'Entreprise : ' + (entreprise || 'Non renseignée'),
+                                  'Prénom : ' + prenom,
+                                  'Email : ' + (fd.get('email') || ''),
+                                  'Téléphone : ' + (fd.get('telephone') || '')];
+                    if (fd.get('message')) lignes.push('Message : ' + fd.get('message'));
+
+                    var envoi = new FormData();
+                    envoi.append('name', prenom);
+                    envoi.append('email', fd.get('email') || '');
+                    envoi.append('phone', fd.get('telephone') || '');
+                    envoi.append('company', entreprise);
+                    envoi.append('subject', 'Demande de projet — ' + (fd.get('projet') || '') + ' — ' + (entreprise || prenom));
+                    envoi.append('message', lignes.join('\n'));
+
+                    var response = await fetch('https://webprime.app/webhook/contact/bc024c6a49270fbd5c6410130a36f4a25f54b1d8af00affb5697d01be039f033', {
+                        method: 'POST',
+                        body: envoi
+                    });
+
+                    if (response.ok) {
+                        window.location.href = 'https://webprime-sud.fr/merci.html';
+                    } else {
+                        alert('Erreur lors de l\'envoi. Veuillez réessayer.');
+                        btn.textContent = originalText;
+                        btn.disabled = false;
+                    }
+                } catch (error) {
+                    alert('Erreur de connexion. Veuillez réessayer.');
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                }
+            });
+
+            form.querySelectorAll('.form-group input, .form-group textarea').forEach(function (el) {
+                el.addEventListener('input', function () { this.closest('.form-group').classList.remove('error'); });
+                el.addEventListener('change', function () { this.closest('.form-group').classList.remove('error'); });
+            });
+        })();
+    </script>
+    <script src="ui.js"></script>
+</body>
+</html>

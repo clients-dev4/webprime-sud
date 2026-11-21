@@ -12,11 +12,11 @@ var RIB = {
     banque: 'Qonto'
 };
 
+var NB_MENSUALITES = 12;
+var PERIODICITE = 'récurrent (mensuel)';
+
 var form = document.getElementById('mandatForm');
 var rum = genererRum();
-var PERIODE = OFFRE.semestriel
-    ? { type: 'récurrent (tous les 6 mois)', montant: 'Montant tous les 6 mois', engagement: 'engagement 6 mois' }
-    : { type: 'récurrent (annuel)', montant: OFFRE.prixSuivant ? 'Montant 1ère année' : 'Montant annuel', engagement: 'engagement 1 an' };
 
 document.getElementById('creancierNom').textContent = CREANCIER.nom;
 document.getElementById('creancierNom2').textContent = CREANCIER.nom;
@@ -57,20 +57,23 @@ function masquerIban(v) {
 
 function formaterEuros(n) { return n.toLocaleString('fr-FR') + '€'; }
 
-function texteSuiteVirement() {
-    if (OFFRE.prixSuivant) return 'Les années suivantes (' + formaterEuros(OFFRE.prixSuivant) + ' / an) sont ensuite prélevées automatiquement par prélèvement SEPA.';
-    return 'Les renouvellements sont ensuite prélevés automatiquement par prélèvement SEPA, ' + (OFFRE.semestriel ? 'tous les 6 mois.' : 'chaque année.');
+function libelleFormule() { return OFFRE.nom + ' — ' + formaterEuros(OFFRE.total); }
+
+function echeancier() {
+    return (NB_MENSUALITES - 1) + ' × ' + formaterEuros(OFFRE.mensualite) + ' puis ' + formaterEuros(OFFRE.derniere);
 }
 
 function blocVirement() {
     var box = document.createElement('div');
     box.className = 'mandat-box mandat-virement';
     box.innerHTML = '<h3>1er paiement par virement</h3><p></p><dl></dl>';
-    box.querySelector('p').textContent = 'Le premier paiement de ' + formaterEuros(OFFRE.prix) +
-        ' se fait par virement bancaire. ' + texteSuiteVirement();
+    box.querySelector('p').textContent = 'Le premier paiement de ' + formaterEuros(OFFRE.acompte) +
+        ' (30% à la signature) se fait par virement bancaire. Les ' + NB_MENSUALITES + ' mensualités (' + echeancier() +
+        ') sont ensuite prélevées automatiquement chaque mois par prélèvement SEPA, puis la gestion mensuelle de ' +
+        formaterEuros(OFFRE.gestion) + ', sans engagement.';
     var dl = box.querySelector('dl');
     [
-        ['Montant', formaterEuros(OFFRE.prix)],
+        ['Montant', formaterEuros(OFFRE.acompte)],
         ['Titulaire', RIB.titulaire],
         ['IBAN', RIB.iban, true],
         ['BIC', RIB.bic, true],
@@ -106,14 +109,6 @@ function blocVirement() {
     var signature = document.getElementById('signatureInfo');
     signature.parentNode.insertBefore(blocVirement(), signature);
 })();
-
-function calculerFormule() {
-    return { libelle: OFFRE.libelle, total: OFFRE.prix };
-}
-
-function majTotal() {
-    document.getElementById('totalAmount').textContent = formaterEuros(OFFRE.prix);
-}
 
 function majSignature() {
     var ville = form.ville.value.trim();
@@ -172,7 +167,6 @@ form.addEventListener('submit', async function (e) {
     btn.textContent = 'Envoi en cours...';
     btn.disabled = true;
 
-    var f = calculerFormule();
     var maintenant = new Date();
     var dateSignature = maintenant.toLocaleDateString('fr-FR') + ' à ' + maintenant.toLocaleTimeString('fr-FR');
     var nomComplet = form.prenom.value.trim() + ' ' + form.nom.value.trim();
@@ -183,12 +177,13 @@ form.addEventListener('submit', async function (e) {
         'MANDAT DE PRÉLÈVEMENT SEPA — ACCEPTÉ EN LIGNE',
         'RUM : ' + rum,
         'Signé le : ' + dateSignature + ' — lieu : ' + form.ville.value.trim(),
-        'Type : ' + PERIODE.type,
+        'Type : ' + PERIODICITE,
         '',
-        'Formule : ' + f.libelle,
-        PERIODE.montant + ' : ' + formaterEuros(f.total),
-        OFFRE.prixSuivant ? 'Années suivantes : ' + formaterEuros(OFFRE.prixSuivant) + ' / an' : null,
-        '1er paiement : par virement de ' + formaterEuros(f.total) + ', prélèvements SEPA ensuite',
+        'Formule : ' + libelleFormule(),
+        '1er paiement (30% à la signature) : ' + formaterEuros(OFFRE.acompte) + ' par virement',
+        NB_MENSUALITES + ' mensualités par prélèvement SEPA : ' + echeancier(),
+        'Total de l\'application : ' + formaterEuros(OFFRE.total),
+        'Ensuite : gestion mensuelle ' + formaterEuros(OFFRE.gestion) + ' / mois, sans engagement',
         '',
         'Titulaire : ' + nomComplet,
         'Raison sociale : ' + (form.entreprise.value.trim() || 'Non renseigné'),
@@ -196,8 +191,8 @@ form.addEventListener('submit', async function (e) {
         'IBAN : ' + iban,
         '',
         'Créancier : ' + CREANCIER.nom + ' — ICS ' + CREANCIER.ics,
-        'Mandat accepté : oui — Formule et ' + PERIODE.engagement + ' acceptés : oui'
-    ].filter(function (l) { return l !== null; }).join('\n');
+        'Mandat accepté : oui — Formule, échéancier et engagement de 12 mois acceptés : oui'
+    ].join('\n');
 
     var payload = new FormData();
     payload.append('name', nomComplet);
@@ -209,16 +204,21 @@ form.addEventListener('submit', async function (e) {
     payload.append('rum', rum);
     payload.append('iban', iban);
     payload.append('adresse', adresse);
-    payload.append('formule', f.libelle);
-    payload.append('montant', String(f.total));
-    payload.append('periodicite', PERIODE.type);
-    if (OFFRE.prixSuivant) payload.append('montant_annees_suivantes', String(OFFRE.prixSuivant));
+    payload.append('formule', libelleFormule());
+    payload.append('formule_cle', OFFRE.cle);
+    payload.append('montant', String(OFFRE.acompte));
+    payload.append('montant_total', String(OFFRE.total));
+    payload.append('nb_mensualites', String(NB_MENSUALITES));
+    payload.append('mensualite', String(OFFRE.mensualite));
+    payload.append('derniere_mensualite', String(OFFRE.derniere));
+    payload.append('gestion_mensuelle', String(OFFRE.gestion));
+    payload.append('periodicite', PERIODICITE);
     payload.append('date_signature', maintenant.toISOString());
 
     try {
         var response = await fetch(WEBHOOK_URL, { method: 'POST', body: payload });
         if (!response.ok) throw new Error('HTTP ' + response.status);
-        afficherConfirmation(f, nomComplet, iban, dateSignature);
+        afficherConfirmation(nomComplet, iban, dateSignature);
     } catch (err) {
         alert('Erreur lors de l\'envoi du mandat. Veuillez réessayer.');
         btn.textContent = texteInitial;
@@ -226,23 +226,16 @@ form.addEventListener('submit', async function (e) {
     }
 });
 
-function packFormulaire() {
-    if (/^Site vitrine/.test(OFFRE.libelle)) return 'Site vitrine';
-    if (/^Site e-commerce/.test(OFFRE.libelle)) return 'Site e-commerce';
-    if (/^Site booking/.test(OFFRE.libelle)) return 'Site booking';
-    return OFFRE.semestriel ? 'Pack 1ère page Google (6 mois)' : 'Pack 1ère page Google (1 an)';
-}
-
 function lienFormulaireProjet() {
     var p = new URLSearchParams();
-    p.set('offre', packFormulaire());
+    p.set('offre', OFFRE.cle);
     if (form.email.value.trim()) p.set('email', form.email.value.trim());
     if (form.telephone.value.trim()) p.set('telephone', form.telephone.value.trim());
     if (form.entreprise.value.trim()) p.set('entreprise', form.entreprise.value.trim());
     return 'https://webprime.fr/dhfgmskfh.html?' + p.toString();
 }
 
-function afficherConfirmation(f, nomComplet, iban, dateSignature) {
+function afficherConfirmation(nomComplet, iban, dateSignature) {
     var lien = lienFormulaireProjet();
     var card = document.getElementById('mandatCard');
     card.innerHTML = '';
@@ -251,21 +244,22 @@ function afficherConfirmation(f, nomComplet, iban, dateSignature) {
     wrap.innerHTML =
         '<h2 class="form-page-title">Mandat bien <span>signé</span> !</h2>' +
         '<p class="form-page-subtitle">Merci, votre mandat de prélèvement SEPA est enregistré. Conservez votre référence de mandat.</p>' +
-        '<div class="mandat-suite"><p><b>Dernière étape :</b> remplissez vos informations pour lancer votre projet.</p>' +
+        '<div class="mandat-suite"><p><b>Dernière étape :</b> remplissez vos informations pour lancer la création de votre application.</p>' +
         '<a class="btn-submit" id="lienFormulaireProjet">Remplir mes informations projet →</a></div>' +
         '<div class="mandat-box"><dl></dl></div>';
     wrap.querySelector('#lienFormulaireProjet').href = lien;
     var dl = wrap.querySelector('dl');
     [
         ['Référence (RUM)', rum],
-        ['Formule', f.libelle],
-        [PERIODE.montant, formaterEuros(f.total)],
-        OFFRE.prixSuivant ? ['Années suivantes', formaterEuros(OFFRE.prixSuivant) + ' / an'] : null,
+        ['Formule', libelleFormule()],
+        ['À la signature', formaterEuros(OFFRE.acompte) + ' par virement'],
+        ['Mensualités', echeancier() + ' par prélèvement'],
+        ['Ensuite', 'Gestion ' + formaterEuros(OFFRE.gestion) + ' / mois, sans engagement'],
         ['Titulaire', nomComplet],
         ['IBAN', masquerIban(iban)],
         ['Signé le', dateSignature],
         ['Créancier', CREANCIER.nom + ' — ICS ' + CREANCIER.ics]
-    ].filter(Boolean).forEach(function (l) {
+    ].forEach(function (l) {
         var dt = document.createElement('dt'); dt.textContent = l[0];
         var dd = document.createElement('dd'); dd.textContent = l[1];
         dl.appendChild(dt); dl.appendChild(dd);
@@ -276,5 +270,4 @@ function afficherConfirmation(f, nomComplet, iban, dateSignature) {
 }
 
 prefillDepuisUrl();
-majTotal();
 majSignature();
